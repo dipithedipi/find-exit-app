@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import Googlelogin from './components/GoogleLogin.vue'
+import GoogleLogin from './components/GoogleLogin.vue';
 </script>
 
 <template>
@@ -21,7 +21,7 @@ import Googlelogin from './components/GoogleLogin.vue'
 
     <div class="flex-none gap-2">
       <div>
-        <Googlelogin />
+        <GoogleLogin />
       </div>
     </div>
   </nav>

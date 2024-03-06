@@ -84,9 +84,12 @@ app.get("/auth/user", isLoggedIn, (req, res) => {
 })
 
 app.get("/auth/logout", (req, res) => {
-  req.session = null;
-  req.logout(() => {});
-  res.send("Logged out");
+  req.session.destroy((err) => {
+    if (!err) {
+      req.logout(() => { });
+    }
+    res.redirect("http://localhost:5173/");
+  })
 })
 
 app.listen(PORT, () => {
