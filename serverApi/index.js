@@ -86,9 +86,9 @@ app.get("/auth/user", isLoggedIn, (req, res) => {
 app.get("/auth/logout", (req, res) => {
   req.session.destroy((err) => {
     if (!err) {
-      req.logout(() => { });
+      req.logout(() => {});
     }
-    res.redirect("http://localhost:5173/");
+    res.redirect("http://localhost:5173");
   })
 })
 
