@@ -12,22 +12,23 @@
         <div v-else class="pr-2">
             <div class="bg-base-200 w-full">
                 <div class="bg-base-100">
-                <div class="flex-none">
-                    <div class="dropdown dropdown-end">
-                        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                            
-                            <div class="w-10 h-10 rounded-full">
-                                <img alt="Tailwind CSS Navbar component"
-                                    :src="user.picture" />
+                    <div class="flex-none">
+                        <div class="dropdown dropdown-end">
+                            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                                <div class="w-10 h-10 rounded-full">
+                                    <img alt="Tailwind CSS Navbar component" :src="user.picture" />
+                                </div>
+                                <!-- <div>
+                                {{ user.displayName }}
+                            </div> -->
                             </div>
+                            <ul tabindex="0"
+                                class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 border-2">
+                                <li><a @click="logout()">Logout</a></li>
+                            </ul>
                         </div>
-                        <ul tabindex="0"
-                            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 border-2">
-                            <li><a @click="logout()">Logout</a></li>
-                        </ul>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>
@@ -51,6 +52,7 @@ export default {
                 let data = await res.json()
                 console.log(data)
                 this.user = data
+                localStorage.setItem('user', JSON.stringify(this.user))
             } else {
                 window.location = 'http://localhost:3000/auth/google'
             }
@@ -62,10 +64,12 @@ export default {
                 credentials: "include",
             })
             this.user = null
+            localStorage.removeItem('user')
+            this.$router.push('/welcome')
         },
 
         alreadyLogged() {
-            return this.user != null
+            return this.user != null;
         }
     },
     mounted() {
@@ -76,6 +80,7 @@ export default {
             if (res.ok) {
                 res.json().then(data => {
                     this.user = data
+                    localStorage.setItem('user', JSON.stringify(this.user))
                 })
             }
         })

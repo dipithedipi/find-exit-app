@@ -88,7 +88,7 @@ app.get("/auth/logout", (req, res) => {
     if (!err) {
       req.logout(() => {});
     }
-    res.redirect("http://localhost:5173");
+    res.redirect("http://localhost:5173/welcome");
   })
 })
 

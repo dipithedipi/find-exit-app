@@ -9,6 +9,15 @@ import GoogleLogin from './components/GoogleLogin.vue';
       <RouterLink class="btn btn-ghost text-xl" to="/">
         Exit Finder
       </RouterLink>
+      
+
+      <ul class="menu menu-horizontal px-1">
+        <li>
+          <RouterLink to="/classrooms">
+            Classrooms
+          </RouterLink>
+        </li>
+      </ul>
 
       <ul class="menu menu-horizontal px-1">
         <li>
@@ -20,15 +29,25 @@ import GoogleLogin from './components/GoogleLogin.vue';
     </div>
 
     <div class="flex-none gap-2">
-      <div>
+      <div v-if="$route.path != '/welcome'">
         <GoogleLogin />
       </div>
     </div>
   </nav>
 
-  <main class="flex justify-center mt-4">
-    <div class="w-4/5">
+  <main class="flex justify-center">
+    <div class="w-full">
     <RouterView />
     </div>
   </main>
 </template>
+
+<script>
+import { mapGetters } from 'vuex';
+
+export default {
+  computed: {
+    ...mapGetters(['user', 'isLoggedIn'])
+  }
+}
+</script>
