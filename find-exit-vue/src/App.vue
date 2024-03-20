@@ -45,7 +45,7 @@ import GoogleLogin from './components/GoogleLogin.vue';
   </div>
 
   <div v-else>
-    <main class="flex justify-center pt-[4.5rem]">
+    <main class="flex justify-center pt-[5rem]">
       <div class="w-full">
         <RouterView />
       </div>

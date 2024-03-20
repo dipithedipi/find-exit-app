@@ -7,7 +7,7 @@ import GoogleLogin from '@/components/GoogleLogin.vue';
         <div class="hero-content text-center">
             <div>
                 <h1 v-if="!alreadyLogged()" class="text-5xl font-bold">Wait,<br> How are you?</h1>
-                <h1 v-else class="text-4xl sm:text-5xl font-bold">Welcome back {{ user.email }}</h1>
+                <h1 v-else class="text-balance sm:text-5xl font-bold">Welcome back {{ user.email }}</h1>
                 <p v-if="!alreadyLogged()" class="py-6">please sign-in to continue</p>
                 <p v-else class="py-6">Now you can start to use the app</p>
                 <div v-if="alreadyLogged()">
