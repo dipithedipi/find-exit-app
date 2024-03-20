@@ -4,28 +4,29 @@ import GoogleLogin from './components/GoogleLogin.vue';
 </script>
 
 <template>
-  <nav class="navbar bg-base-300">
+  <nav class="navbar absolute bg-base-300">
     <div class="flex-1">
       <RouterLink class="btn btn-ghost text-xl" to="/">
         Exit Finder
       </RouterLink>
-      
 
-      <ul class="menu menu-horizontal px-1">
-        <li>
-          <RouterLink to="/classrooms">
-            Classrooms
-          </RouterLink>
-        </li>
-      </ul>
+      <div v-if="alreadyLogged()">
+        <ul class="menu menu-horizontal px-1">
+          <li>
+            <RouterLink to="/classrooms">
+              Classrooms
+            </RouterLink>
+          </li>
+        </ul>
 
-      <ul class="menu menu-horizontal px-1">
-        <li>
-          <RouterLink to="/about">
-            About
-          </RouterLink>
-        </li>
-      </ul>
+        <ul class="menu menu-horizontal px-1">
+          <li>
+            <RouterLink to="/about">
+              About
+            </RouterLink>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div class="flex-none gap-2">
@@ -35,9 +36,9 @@ import GoogleLogin from './components/GoogleLogin.vue';
     </div>
   </nav>
 
-  <main class="flex justify-center">
+  <main class="flex justify-center pt-[4.5rem]">
     <div class="w-full">
-    <RouterView />
+      <RouterView />
     </div>
   </main>
 </template>
@@ -46,8 +47,29 @@ import GoogleLogin from './components/GoogleLogin.vue';
 import { mapGetters } from 'vuex';
 
 export default {
+  data() {
+    return {
+      user: JSON.parse(localStorage.getItem("user"))
+    }
+  },
+  watch:{
+    $route (){
+      this.user = null
+      if(JSON.parse(localStorage.getItem('user'))){
+        this.user = JSON.parse(localStorage.getItem('user'))
+      }
+    }
+  },
   computed: {
     ...mapGetters(['user', 'isLoggedIn'])
+  },
+  methods: {
+    alreadyLogged() {
+      return this.user != null;
+    }
+  },
+  mounted() {
+    this.user = JSON.parse(localStorage.getItem("user"))
   }
 }
 </script>

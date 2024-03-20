@@ -1,9 +1,13 @@
 <template>
   <main>
-    <div>
+    <div class="pl-5">
       NAME: {{ user.displayName }}
       <br>
       EMAIL: {{ user.email }}
+      <br>
+      CLASSE:
+      <br>
+      PUNTO DI RACCOLTA:
     </div>
   </main>
 </template>
@@ -14,8 +18,6 @@ export default {
     return {
       user: JSON.parse(localStorage.getItem("user"))
     }
-  },
-  methods: {
   },
   mounted() {
     this.user = JSON.parse(localStorage.getItem("user"))
