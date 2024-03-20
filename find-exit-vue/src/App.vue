@@ -36,11 +36,21 @@ import GoogleLogin from './components/GoogleLogin.vue';
     </div>
   </nav>
 
-  <main class="flex justify-center pt-[4.5rem]">
-    <div class="w-full">
-      <RouterView />
-    </div>
-  </main>
+  <div v-if="$route.path == '/welcome'">
+    <main class="flex justify-center">
+      <div class="w-full">
+        <RouterView />
+      </div>
+    </main>
+  </div>
+
+  <div v-else>
+    <main class="flex justify-center pt-[4.5rem]">
+      <div class="w-full">
+        <RouterView />
+      </div>
+    </main>
+  </div>
 </template>
 
 <script>
@@ -52,10 +62,10 @@ export default {
       user: JSON.parse(localStorage.getItem("user"))
     }
   },
-  watch:{
-    $route (){
+  watch: {
+    $route() {
       this.user = null
-      if(JSON.parse(localStorage.getItem('user'))){
+      if (JSON.parse(localStorage.getItem('user'))) {
         this.user = JSON.parse(localStorage.getItem('user'))
       }
     }

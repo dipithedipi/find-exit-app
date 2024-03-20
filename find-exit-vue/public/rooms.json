@@ -643,24 +643,24 @@
         "ROOM_ID": 82,
         "Name": "PAL1",
         "Longname": "Palestra 1",
-        "Palazzina": "palestra",
-        "Piano": "0",
+        "Palazzina": "palestre",
+        "Piano": "1",
         "PuntoDiRaccolta": "3"
     },
     {
         "ROOM_ID": 83,
         "Name": "PAL2",
         "Longname": "Palestra 2",
-        "Palazzina": "palestra",
-        "Piano": "0",
+        "Palazzina": "palestre",
+        "Piano": "1",
         "PuntoDiRaccolta": "3"
     },
     {
         "ROOM_ID": 84,
         "Name": "PALF",
         "Longname": "Pal. Fitness",
-        "Palazzina": "palestra",
-        "Piano": "0",
+        "Palazzina": "palestre",
+        "Piano": "1",
         "PuntoDiRaccolta": "3"
     },
     {
