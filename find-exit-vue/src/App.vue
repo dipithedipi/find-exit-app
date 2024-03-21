@@ -21,6 +21,15 @@ import GoogleLogin from './components/GoogleLogin.vue';
 
         <ul class="menu menu-horizontal px-1">
           <li>
+            <RouterLink to="/collectionPoints">
+              Points
+            </RouterLink>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <ul class="menu hidden sm:block menu-horizontal px-1">
+          <li>
             <RouterLink to="/about">
               About
             </RouterLink>

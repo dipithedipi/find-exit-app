@@ -49,6 +49,21 @@ export default {
   mounted() {
     this.user = JSON.parse(localStorage.getItem("user"))
     console.log('user', this.user)
+    this.getLessonHour()
+  },
+  methods: {
+    getLessonHour() {
+      const date = new Date()
+      const hour = date.getHours()
+
+      return hour-7
+    },
+    getRoom() {
+      return null 
+    },
+    getPuntoDiRaccolta() {
+     return null 
+    }
   }
 }
 </script>
