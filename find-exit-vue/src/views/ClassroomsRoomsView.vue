@@ -1,23 +1,23 @@
 <template>
     <div class="w-11/12 container mx-auto">
         <div v-for="floor in floors" :key="floor">
-            <details>
-                <summary class="collapse-title text-xl font-medium">Piano {{ floor === 1 ? "Terra" : floor-1 }}</summary>
-                <div class="collapse-title grid grid-cols-1 gap-x-3 gap-y-6 place-items-center sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-                    <div class="pl-8" v-for="room in roomsOnFloor(floor)" :key="room.ROOM_ID">
-                        <div :class="['pd-10', 'card', 'w-72', 'h-20', 'shadow-xl', 'border-gray-500', 'border-2', 'flex', 'flex-col', 'justify-center', 'items-center', getCardColor(room.PuntoDiRaccolta)]">
-                            <div class="flex space-x-4 justify-center items-center">
-                                <div class="text-xl pl-2">{{ room.Longname }}</div>
-                                <div class="flex pr-2">
-                                    <span class="material-symbols-outlined">
-                                    arrow_forward
-                                    </span>
-                                    <span class="line-clamp-1 material-symbols-outlined">
-                                    counter_{{ room.PuntoDiRaccolta }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+            <details open>
+                <summary class="text-xl font-medium divider" style="padding-inline-end: 0px; display: flex; align-items: center;" @click="openFloors[floor]=!openFloors[floor]">
+                    <div class="pb-1">Piano {{ floor === 1 ? "Terra" : floor-1 }}</div>
+                    <div v-if="isOpen(floor)" class="ml-auto">
+                        <span class="material-symbols-outlined scale-150">
+                            arrow_drop_down
+                        </span>
+                    </div>
+                    <div v-else class="ml-auto">
+                        <span class="material-symbols-outlined scale-150">
+                            arrow_right
+                        </span>
+                    </div>
+                </summary>
+                <div class="sm:px-6 pt-3">
+                    <div class="pb-12 grid grid-cols-1 gap-x-3 gap-y-6 place-items-center sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+                        <ClassroomCard v-for="room of roomsOnFloor(floor)" :name="room.Name" :longName="room.Longname" :gatheringPoint="room.PuntoDiRaccolta" :floor="room.Piano" :building="''"/>
                     </div>
                 </div>
             </details>
@@ -25,15 +25,20 @@
     </div>
 </template>
 
+
 <script>
+import ClassroomCard from "../components/ClassroomCard.vue";
+import { sortRooms } from "../utils/sortRooms.js";
+
 export default {
     data() {
         return {
             rooms: [],
             palazzina: null,
             floors: 0,
-            nearestCollectionPoint: null, // Aggiungi una variabile per memorizzare il punto di raccolta più vicino
-            colors: ['bg-red-600', 'bg-pink-600', 'bg-yellow-400', 'bg-green-800', 'bg-teal-400', 'bg-purple-800'] // Definisci i sei colori
+            nearestCollectionPoint: null,
+            colors: ['bg-red-600', 'bg-pink-600', 'bg-yellow-400', 'bg-green-800', 'bg-teal-400', 'bg-purple-800'],
+            openFloors: [true, true, true, true, true]
         }
     },
     mounted() {
@@ -43,10 +48,10 @@ export default {
         fetch("../../public/rooms.json")
             .then(response => response.json())
             .then(data => {
+                data = sortRooms(data);
                 this.rooms = data.filter(room => room.Palazzina === this.palazzina);
                 console.log(this.rooms);
 
-                // Calcola il numero massimo di piani per la palazzina specifica
                 this.floors = Math.max(...this.rooms.map(room => Number(room.Piano)));
             });
     },
@@ -58,6 +63,15 @@ export default {
             collectionPoint = Number(collectionPoint);
             return this.colors[collectionPoint-1]; 
         },
+        isOpen(floor) {
+            return this.openFloors[floor];
+        },
+        toggleOpen(floor) {
+            this.openFloors[floor] = !this.openFloors[floor];
+        }
+    },
+    components: {
+        ClassroomCard
     }
 }
 </script>

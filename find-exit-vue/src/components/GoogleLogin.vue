@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="pt-1">
         <button v-if="!alreadyLogged()" @click="login()" type="button"
             class="text-white w-full bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
             <svg class="mr-2 -ml-1 w-4 h-4" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google"
@@ -23,8 +23,15 @@
                             </div> -->
                             </div>
                             <ul tabindex="0"
-                                class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 border-2">
-                                <li><a @click="logout()">Logout</a></li>
+                                class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-32 border-2 border-gray-700">
+                                <li><a @click="logout()" class="py-2 hover:text-red-700">
+                                    <span class="material-symbols-outlined">
+                                        logout
+                                    </span>
+                                    <div>
+                                        Logout
+                                    </div>
+                                </a></li>
                             </ul>
                         </div>
                     </div>
@@ -54,6 +61,7 @@ export default {
                 this.user = data
                 localStorage.setItem('user', JSON.stringify(this.user))
             } else {
+                localStorage.removeItem('user')
                 window.location = 'http://localhost:3000/auth/google'
             }
         },
@@ -82,6 +90,8 @@ export default {
                     this.user = data
                     localStorage.setItem('user', JSON.stringify(this.user))
                 })
+            } else {
+                localStorage.removeItem('user')
             }
         })
     }

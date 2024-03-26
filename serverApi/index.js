@@ -61,7 +61,7 @@ app.get("/auth/failed", (_req, res) => {
 })
 
 app.get("/auth/success", isLoggedIn, (req, res) => {
-  res.redirect("http://localhost:5173/");
+  res.redirect("http://localhost:5173/welcome");
 })
 
 app.get("/auth/google",

@@ -27,3 +27,6 @@ npm run dev
 ```sh
 npm run build
 ```
+
+
+per fingere di essere un RSPP modificare riga 29 del file "./router/index.js" mettere a true "forceRSPP"
