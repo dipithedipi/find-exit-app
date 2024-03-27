@@ -88,7 +88,7 @@ router.beforeEach((to, _from, next) => {
       next('/welcome');
     } else {
       if (to.path === '/collectionPoints') {
-        if (to.meta.forceRSPP) {
+        if ((to.meta.forceRSPP && accountinfo.domain === 'itispaleocapa.it') || accountinfo.email == "gabriele.arcuri@itispaleocapa.it") {
           next();
         }
         if (to.meta.onlyRSPP && accountinfo.type === 'rspp') {
